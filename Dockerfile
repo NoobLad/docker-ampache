@@ -20,7 +20,7 @@ ADD https://github.com/ampache/ampache/archive/3.8.0-beta1.tar.gz /opt/master.ta
 
 # extraction / installation
 RUN rm -rf /var/www/* && \
-    tar -C /var/www -xf /opt/master.tar.gz ampache-master --strip=1 && \
+    tar -C /var/www -xf /opt/master.tar.gz ampache-3.8.0-beta1 --strip=1 && \
     chown -R www-data /var/www
 
 # setup mysql like this project does it: https://github.com/tutumcloud/tutum-docker-mysql
