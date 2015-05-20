@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server apache2 wget 
 
 # For local testing / faster builds
 # COPY master.tar.gz /opt/master.tar.gz
-ADD https://github.com/ampache/ampache/archive/master.tar.gz /opt/master.tar.gz
+ADD https://github.com/ampache/ampache/archive/3.8.0-beta1.tar.gz /opt/master.tar.gz
 
 # extraction / installation
 RUN rm -rf /var/www/* && \
