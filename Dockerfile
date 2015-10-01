@@ -35,9 +35,9 @@ ENV MYSQL_PASS **Random**
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
 
 #upload size
-RUN sed -i "s/upload_max_filesize =.*$/upload_max_filesize = 100M/" /etc/php5/fpm/php.ini && \
+RUN sed -i "s/upload_max_filesize =.*$/upload_max_filesize = 100M/" /etc/php5/apache2/php.ini && \
 sed -i "s/upload_max_filesize =.*$/upload_max_filesize = 100M/" /etc/php5/cli/php.ini && \
-sed -i "s/post_max_size =.*$/post_max_size = 100M/" /etc/php5/fpm/php.ini && \
+sed -i "s/post_max_size =.*$/post_max_size = 100M/" /etc/php5/apache2/php.ini && \
 sed -i "s/post_max_size =.*$/post_max_size = 100M/" /etc/php5/cli/php.ini
 
 # setup apache with default ampache vhost
