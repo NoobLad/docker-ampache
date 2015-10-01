@@ -16,11 +16,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server apache2 wget 
 
 # For local testing / faster builds
 # COPY master.tar.gz /opt/master.tar.gz
-ADD https://github.com/ampache/ampache/archive/3.8.0-beta2.tar.gz /opt/master.tar.gz
+ADD https://github.com/ampache/ampache/archive/3.8.0.tar.gz /opt/master.tar.gz
 
 # extraction / installation
 RUN rm -rf /var/www/* && \
-    tar -C /var/www -xf /opt/master.tar.gz ampache-3.8.0-beta2 --strip=1 && \
+    tar -C /var/www -xf /opt/master.tar.gz ampache-3.8.0 --strip=1 && \
     chown -R www-data /var/www
 
 # setup mysql like this project does it: https://github.com/tutumcloud/tutum-docker-mysql
@@ -33,6 +33,12 @@ RUN chmod 755 /*.sh
 ENV MYSQL_PASS **Random**
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
+
+#upload size
+RUN sed -i "s/upload_max_filesize =.*$/upload_max_filesize = 100M/" /etc/php5/fpm/php.ini && \
+sed -i "s/upload_max_filesize =.*$/upload_max_filesize = 100M/" /etc/php5/cli/php.ini && \
+sed -i "s/post_max_size =.*$/post_max_size = 100M/" /etc/php5/fpm/php.ini && \
+sed -i "s/post_max_size =.*$/post_max_size = 100M/" /etc/php5/cli/php.ini
 
 # setup apache with default ampache vhost
 ADD 001-ampache.conf /etc/apache2/sites-available/
